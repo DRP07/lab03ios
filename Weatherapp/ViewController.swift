@@ -24,11 +24,7 @@ class ViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
 
         searchField.delegate = self
-        searchField.attributedPlaceholder = NSAttributedString(
-            string: "Enter location",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.black]
-        )
-
+        searchField.placeholder = "Enter location"
 
         searchBtn.addTarget(self, action: #selector(searchTemp), for: .touchUpInside)
         locationBtn.addTarget(self, action: #selector(getCurrentLocWeather), for: .touchUpInside)
@@ -85,9 +81,9 @@ class ViewController: UIViewController {
     func fetchWeather(for location: String) {
         showLoading(true)
         let apiKey = "7929acf4e0534f1caa122441240411"
-        let fullURL = "https://api.weatherapi.com/v1/current.json?key=\(apiKey)&q=\(location)&aqi=no"
+        let urlString = "https://api.weatherapi.com/v1/current.json?key=\(apiKey)&q=\(location)&aqi=no"
         
-        guard let url = URL(string: fullURL) else {
+        guard let url = URL(string: urlString) else {
             showAlert(message: "Invalid URL")
             showLoading(false)
             return
@@ -114,9 +110,9 @@ class ViewController: UIViewController {
     func fetchWeatherForCurrentLocation(latitude: Double, longitude: Double) {
         showLoading(true)
         let apiKey = "7929acf4e0534f1caa122441240411"
-        let fullURL = "https://api.weatherapi.com/v1/current.json?key=\(apiKey)&q=\(latitude),\(longitude)&aqi=no"
+        let urlString = "https://api.weatherapi.com/v1/current.json?key=\(apiKey)&q=\(latitude),\(longitude)&aqi=no"
         
-        guard let url = URL(string: fullURL) else {
+        guard let url = URL(string: urlString) else {
             showAlert(message: "Invalid URL")
             showLoading(false)
             return
@@ -146,6 +142,7 @@ class ViewController: UIViewController {
         currentTemp = weatherResponse.current
         updateTemperatureUnit()
 
+        weatherIcon.image = UIImage(named: "defaultWeatherIcon")
 
         if let iconURL = URL(string: "https:\(weatherResponse.current.condition.icon)") {
             URLSession.shared.dataTask(with: iconURL) { data, _, _ in
