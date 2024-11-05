@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "4B811F33-C11E-4643-AF7E-A9450EEE039D",
+      "name" : "Configuration 1",
+      "options" : {
+        "locationScenario" : {
+          "identifier" : "Sydney, Australia",
+          "referenceType" : "built-in"
+        }
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "locationScenario" : {
+      "identifier" : "London, England",
+      "referenceType" : "built-in"
+    },
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+
+  ],
+  "version" : 1
+}
